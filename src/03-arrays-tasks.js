@@ -430,8 +430,8 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => a.country.localeCompare(b.country) || a.city.localeCompare(b.city));
 }
 
 /**
@@ -452,9 +452,10 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array(n).fill(0).map((num1, i) => Array(n).fill(0).map((num2, j) => (i === j ? 1 : 0)));
 }
+
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
@@ -576,8 +577,24 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let swapped = [];
+  let head = [];
+  let tail = [];
+  if (arr.length === 1) {
+    return arr;
+  }
+  if (arr.length % 2 === 0) {
+    head = arr.slice(0, arr.length / 2);
+    tail = arr.slice(arr.length / 2, arr.length);
+    swapped = swapped.concat(tail, head);
+  } else {
+    head = arr.slice(0, arr.length / 2);
+    tail = arr.slice(arr.length / 2 + 1, arr.length);
+    const middle = arr[(arr.length - 1) / 2];
+    swapped = swapped.concat(tail, middle, head);
+  }
+  return swapped;
 }
 
 

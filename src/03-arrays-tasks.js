@@ -578,7 +578,7 @@ function getElementByIndexes(/* arr, indexes */) {
  *
  */
 function swapHeadAndTail(arr) {
-  let swapped = [];
+  let swap = [];
   let head = [];
   let tail = [];
   if (arr.length === 1) {
@@ -587,14 +587,14 @@ function swapHeadAndTail(arr) {
   if (arr.length % 2 === 0) {
     head = arr.slice(0, arr.length / 2);
     tail = arr.slice(arr.length / 2, arr.length);
-    swapped = swapped.concat(tail, head);
+    swap = swap.concat(tail, head);
   } else {
     head = arr.slice(0, arr.length / 2);
     tail = arr.slice(arr.length / 2 + 1, arr.length);
     const middle = arr[(arr.length - 1) / 2];
-    swapped = swapped.concat(tail, middle, head);
+    swap = swap.concat(tail, middle, head);
   }
-  return swapped;
+  return swap;
 }
 
 

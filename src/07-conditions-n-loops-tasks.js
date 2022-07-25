@@ -125,8 +125,11 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  return !(rect1.left + rect1.width < rect2.left
+    || rect2.left + rect2.width < rect1.left
+    || rect1.top + rect1.height < rect2.top
+    || rect2.top + rect2.height < rect1.top);
 }
 
 
@@ -324,8 +327,38 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const brackets = {
+    '[': ']',
+    '(': ')',
+    '{': '}',
+    '<': '>',
+  };
+  const openBrackets = Object.keys(brackets);
+  const swappedBracketsPairs = Object.fromEntries(Object.entries(brackets).map(
+    ([key, value]) => [value, key],
+  ));
+  const stack = [];
+  if (str.length % 2 !== 0) {
+    return false;
+  }
+  for (let i = 0; i < str.length; i += 1) {
+    const currentSymbol = str[i];
+    const topElement = stack[stack.length - 1];
+    if (openBrackets.includes(currentSymbol)) {
+      stack.push(currentSymbol);
+    } else {
+      if (stack.length === 0) {
+        return false;
+      }
+      if (swappedBracketsPairs[currentSymbol] === topElement) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
 }
 
 
